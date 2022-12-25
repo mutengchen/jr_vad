@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>文件下载</title>
+
+        <style>
+            a{
+                text-decoration: none;
+                color: #2062e0;
+            }
+            a:hover{
+                text-decoration: none;
+                color: #2062e0;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div align="center">
+            <h1>转换后的文件下载</h1><br><br>
+            {# 将指定文件夹中的文件获取遍历显示 #}
+            {% for n in name %}
+
+            <a href="output/{{ n }}">{{ n }}</a>
+            <a href={{ url_for('application.download_file', filename=n) }}>
+            <button>下载</button>
+            </a>
+            <br>
+            {% endfor %}
+        </div>
+    </body>
+</html>

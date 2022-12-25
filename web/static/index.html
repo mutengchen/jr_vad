@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>warning_index</title>
+    <link rel="stylesheet" href="css/warn.css">
+    <link rel="stylesheet" href="css/server.css">
+    <link rel="stylesheet" href="css/control.css">
+    <link rel="stylesheet" href="warning_icon/iconfont.css">
+    <link rel="stylesheet" href="css/zxf_page.css">
+    <!-- <link rel="stylesheet" href="css/element-ui.css" />
+    <script src="js/element-ui.js"></script> -->
+    <script src="js/jquery-3.6.1.js"></script>
+    <script src="js/zxf_page.js"></script>
+    <script src="js/echarts.js"></script>
+    <script src="js/datetime_js_css_include.js"></script>
+    <script src="js/datetime.js"></script>
+    <script src="js/pywebview.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script> -->
+
+</head>
+
+<body>
+    <div class="indexbackgroud">
+        <!--顶部区块-->
+        <div class="title">
+            <!-- <img src="images/logo.svg" alt="logo" class="logo"> -->
+            <img src="images/logo.png" alt="logo" class="logo">
+            <span>资源预警小哨兵</span>
+            <div class="close_background">
+                <img src="images/close.svg" alt="close" class="close">
+            </div>
+            <div class="mini_background">
+                <img src="images/mini.svg" alt="mini" class="mini">
+            </div>
+            <div class="message_background">
+                <img src="images/message.svg" alt="message" class="message">
+            </div>
+
+        </div>
+        <!--下左侧区块-->
+        <div class="bot_left">
+            <ul>
+                <li id="control" class="list_normal">
+                    <i class="iconfont icon-home"></i>
+                    监控看板
+                </li>
+                <li id="server" class="list_normal">
+                    <i class="iconfont icon-electronics"></i>
+                    服务器管理
+                </li>
+                <li id="warn" class="list_normal">
+                    <i class="iconfont icon-warning"></i>
+                    警报管理
+                </li>
+                <!-- <li id="system" class="list_normal">
+                    <i class="iconfont icon-modular"></i>
+                    系统设置
+                </li> -->
+            </ul>
+        </div>
+        <!--下右区块-->
+        <!--监控看板    -->
+        <div class="board_fog" id="board_fog">
+            <div class="wait_title">数据加载中</div>
+        </div>
+        <div class="board control">
+            <!-- <span class="controlTitle" id="controlTitle"></span> -->
+            <select name="lastServerSelect" id="lastServerSelect" class="controlTitle"></select>
+            <!--        日期时间控件-->
+            <!-- <div class="timeSelect">
+                <div class="lastTimeSelect">
+                    <select name="lastTimeSelect" id="lastTimeSelect">
+                        <option value="1">时间 1分钟</option>
+                        <option value="5">时间 5分钟</option>
+                        <option value="10">时间 10分钟</option>
+                        <option value="30">时间 30分钟</option>
+                        <option value="60">时间 1小时</option>
+                    </select>
+                </div>
+                <div class="dateTimepicker">
+                    <input type="text" id="beginDateTimepicker" name="beginDateTimepicker" value="" />
+                    ~ <input type="text" id="endDateTimepicker" name="endDateTimepicker" value="" />
+                    <button type="submit" id="drawChartButton">
+                        <i class="iconfont icon-refresh"></i>
+                    </button>
+                </div>
+            </div> -->
+            <div class="drawRegion">
+            </div>
+            <!--    图表看板-->
+            <div class="echarts">
+                <!--全屏显示的容器-->
+                <div id="fullScreenMask">
+                    <div id="fullScreen" style="position: relative;width: 100%;height: 100%;"></div>
+                </div>
+                <div>
+                    <!-- <button onclick="zoomFunction()" type="button" class="fullscreen-expand" id="chart1Button1">
+                        <i class="iconfont icon-fullscreen-expand"></i>
+                    </button> -->
+                    <div class="chart" id="chart1"></div>
+                    <div id="nothing1" class="nothing">
+                        <span class="chartTittle">CPU使用率</span>
+                        <span class="chartNothing">暂无数据</span>
+                    </div>
+                </div>
+                <div>
+                    <!-- <button onclick="zoomFunction()" type="button" class="fullscreen-expand" id="chart1Button3">
+                        <i class="iconfont icon-fullscreen-expand"></i>
+                    </button> -->
+                    <div class="chart" id="chart3"></div>
+                    <div id="nothing3" class="nothing">
+                        <span class="chartTittle">内存使用率</span>
+                        <span class="chartNothing">暂无数据</span>
+                    </div>
+                </div>
+                <div>
+                    <!-- <button onclick="zoomFunction()" type="button" class="fullscreen-expand" id="chart1Button2">
+                        <i class="iconfont icon-fullscreen-expand"></i>
+                    </button> -->
+                    <div class="chart" id="chart2"></div>
+                    <div id="nothing2" class="nothing">
+                        <span class="chartTittle">硬盘使用率</span>
+                        <span class="chartNothing">暂无数据</span>
+                    </div>
+                </div>
+                <div>
+                    <!-- <button onclick="zoomFunction()" type="button" class="fullscreen-expand" id="chart1Button4">
+                        <i class="iconfont icon-fullscreen-expand"></i>
+                    </button> -->
+                    <div class="chart" id="chart4"></div>
+                    <div id="nothing4" class="nothing">
+                        <span class="chartTittle">Mysql</span>
+                        <span class="chartNothing">暂无数据</span>
+                    </div>
+                </div>
+                <div style="position: relative">
+                    <!-- <button onclick="zoomFunction()" type="button" class="fullscreen-expand" id="chart1Button5">
+                        <i class="iconfont icon-fullscreen-expand"></i>
+                    </button> -->
+                    <div class="chart" id="chart5"></div>
+                    <div id="nothing5" class="nothing">
+                        <span class="chartTittle">SQL Server</span>
+                        <span class="chartNothing">暂无数据</span>
+                    </div>
+                </div>
+                <div>
+                    <!-- <button onclick="zoomFunction()" type="button" class="fullscreen-expand" id="chart1Button6">
+                        <i class="iconfont icon-fullscreen-expand"></i>
+                    </button> -->
+                    <div class="chart" id="chart6"></div>
+                    <div id="nothing6" class="nothing">
+                        <span class="chartTittle">Qracle</span>
+                        <span class="chartNothing">暂无数据</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!--        服务器管理面板-->
+        <div class="board server">
+            <div class="fog" id="fog"></div>
+            <!--        <span class="serverTitle">服务器管理</span>-->
+            <!--        <div class="create">-->
+            <!--            <i class="iconfont icon-add-bold"></i>-->
+            <!--        </div>-->
+
+            <!--        <table class="server_message">-->
+            <!--            <thead>-->
+            <!--            <tr>-->
+            <!--                <td class="list1">-->
+            <!--                    <input type="checkbox">-->
+            <!--                </td>-->
+            <!--                <td class="server_name">服务器名</td>-->
+            <!--                <td class="sevrer_ip">服务器IP</td>-->
+            <!--                <td class="server_Oracle">Oracle</td>-->
+            <!--                <td class="server_MySQL">MySQL</td>-->
+            <!--                <td class="server_SqlServer">Sql Server</td>-->
+            <!--                <td class="operation">操作</td>-->
+            <!--            </tr>-->
+            <!--            </thead>-->
+            <!--            <tbody>-->
+            <!--            <tr>-->
+            <!--                <td>-->
+            <!--                    <input type="checkbox">-->
+            <!--                </td>-->
+            <!--                <td>内容</td>-->
+            <!--                <td>内容</td>-->
+            <!--                <td>内容</td>-->
+            <!--                <td>内容</td>-->
+            <!--                <td>内容</td>-->
+            <!--                <td class="operation_button">-->
+            <!--                    <button type="button" class="read">详情</button>-->
+            <!--                    <button type="button" class="update">编辑</button>-->
+            <!--                    <button type="button" class="delete">删除</button>-->
+            <!--                </td>-->
+            <!--            </tr>-->
+
+            <!--            </tbody>-->
+            <!--        </table>-->
+            <!-- <div style="padding-top: 70px;padding-left: 10px;width: 780px">
+                <span class="serverTitle">服务器管理</span>
+                <div class="container">
+                    <div class="row clearfix">
+
+                        <div class="col-md-4 column">
+                            <div class="panel-group" id="panel-877401">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-877401"
+                                            href="#panel-element-272719">服务器1</a>
+                                    </div>
+                                    <div id="panel-element-272719" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            SSH
+                                        </div>
+                                        <div class="panel-body">
+                                            Mysql
+                                        </div>
+                                        <div class="panel-body">
+                                            Oracle
+                                        </div>
+                                        <div class="panel-body">
+                                            Sql Server
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-877401"
+                                            href="#panel-element-555072">Collapsible Group Item #2</a>
+                                    </div>
+                                    <div id="panel-element-555072" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 column">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label><input type="email"
+                                        class="form-control" id="exampleInputEmail1" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label><input type="password"
+                                        class="form-control" id="exampleInputPassword1" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">File input</label><input type="file"
+                                        id="exampleInputFile" />
+                                    <p class="help-block">
+                                        Example block-level help text here.
+                                    </p>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" />Check me out</label>
+                                </div> <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div style="padding-top: 70px;padding-left: 10px;width: 780px">
+                <div class="edit_confirm" id="edit_confirm">
+                    <span class="edit_button">确定修改？</span>
+                    <div type="submit" class="btn btn-default edit_yes" onclick="editYes()">确认</div>
+                    <div type="submit" class="btn btn-default edit_cancle" onclick="editCancle()">取消</div>
+                </div>
+                <div class="edit_confirm" id="edit_success">
+                    <span class="edit_button">修改成功</span>
+                    <div type="submit" class="btn btn-default edit_Success" onclick="editSuccess()">确认</div>
+                </div>
+                <div class="edit_confirm" id="edit_fail">
+                    <span class="edit_button">修改失败!</span>
+                    <div type="submit" class="btn btn-default edit_Success" onclick="editFail()">确认</div>
+                </div>
+                <div class="edit_confirm delet_confirm" id="delete_confirm">
+                    <span class="delete_button">确定删除该服务器？</span>
+                    <div type="submit" class="btn btn-default delete_yes" onclick="deleteYes()">删除</div>
+                    <div type="submit" class="btn btn-default delete_cancle" onclick="deleteCancle()">取消</div>
+                </div>
+                <div class="edit_confirm" id="delete_success">
+                    <span class="edit_button">删除成功</span>
+                    <div type="submit" class="btn btn-default edit_Success" onclick="deleteSuccess()">确认</div>
+                </div>
+                <div class="edit_confirm" id="delete_fail">
+                    <span class="edit_button">删除失败!</span>
+                    <div type="submit" class="btn btn-default edit_Success" onclick="deleteFail()">确认</div>
+                </div>
+                <div class="edit_confirm" id="add_success">
+                    <span class="edit_button">添加成功</span>
+                    <div type="submit" class="btn btn-default edit_Success" onclick="addSuccess()">确认</div>
+                </div>
+                <div class="edit_confirm" id="add_fail">
+                    <span class="edit_button">添加失败!</span>
+                    <div type="submit" class="btn btn-default edit_Success" onclick="addFail()">确认</div>
+                </div>
+                <!-- 添加表单填写错误提示 -->
+                <div class="edit_confirm" id="add_name">
+                    <span class="edit_button">请填写服务器名字</span>
+                    <div type="submit" class="btn btn-default edit_Success" onclick="addName()">确认</div>
+                </div>
+                <div class="edit_confirm" id="add_ip">
+                    <span class="edit_button">请正确填写IP地址格式</span>
+                    <!-- <span class="edit_button2">(x.x.x.x且0-255）</span> -->
+                    <div type="submit" class="btn btn-default edit_Success" onclick="addIp()">确认</div>
+                </div>
+                <div class="create">
+                    <i class="iconfont icon-add-bold" id="add_server"></i>
+                </div>
+                <span class="serverTitle">服务器管理</span>
+                <div class="container">
+                    <div class="server_List" id="server_List"></div>
+                    <div class="table_box">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="server_name">服务器名字</label><input type="server_name" class="form-control"
+                                    id="server_name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="server_ip">服务器IP</label><input type="server_ip" class="form-control"
+                                    id="server_ip" />
+                            </div>
+                            <div class="form-group">
+                                <label for="server_port">服务器端口</label><input type="server_port" class="form-control"
+                                    id="server_port" />
+                            </div>
+                            <div class="form-group">
+                                <label for="server_username">服务器用户名</label><input type="server_username"
+                                    class="form-control" maxlength="16" id="server_username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="server_pwd">服务器密码</label><input type="password" maxlength="16"
+                                    class="form-control" id="server_pwd" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mysql_ip">Mysql IP</label><input type="mysql_ip" class="form-control"
+                                    id="mysql_ip" />
+                            </div>
+                            <div class="form-group">
+                                <label for="mysql_port">Mysql端口</label><input type="mysql_port" class="form-control"
+                                    id="mysql_port" />
+                            </div>
+                            <div class="form-group">
+                                <label for="mysql_username">Mysql用户名</label><input type="mysql_username"
+                                    class="form-control" maxlength="16" id="mysql_username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="mysql_password">Mysql密码</label><input type="password" maxlength="16"
+                                    class="form-control" id="mysql_password" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="oracle_db">Oracle服务名</label><input type="oracle_db" maxlength="32"
+                                    class="form-control" id="oracle_db" />
+                            </div>
+                            <div class="form-group">
+                                <label for="oracle_ip">Oracle IP</label><input type="oracle_ip" class="form-control"
+                                    id="oracle_ip" />
+                            </div>
+                            <div class="form-group">
+                                <label for="oracle_port">Oracle端口</label><input type="oracle_port" class="form-control"
+                                    id="oracle_port" />
+                            </div>
+                            <div class="form-group">
+                                <label for="oracle_username">Oracle用户名</label><input type="oracle_username"
+                                    class="form-control" maxlength="16" id="oracle_username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="oracle_password">Oracle密码</label><input type="password" maxlength="16"
+                                    class="form-control" id="oracle_password" />
+                            </div>
+                            <div class="form-group">
+                                <label for="oracle_type">Oracle类型</label>
+                                <!-- <input type="oracle_type" class="form-control" id="oracle_type" /> -->
+                                <div class="checkBigbox">
+                                    <input type="radio" name="value" id="oracle_type" value="0" class="checkboxs">Basic
+                                    <input type="radio" name="value" id="oracle_type" value="1" class="checkboxst">TNS
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sql_server_ip">SQL Server IP</label><input type="sql_server_ip"
+                                    class="form-control" id="sql_server_ip" />
+                            </div>
+                            <div class="form-group">
+                                <label for="sql_server_port">SQL Server端口</label><input type="sql_server_port"
+                                    class="form-control" id="sql_server_port" />
+                            </div>
+                            <div class="form-group">
+                                <label for="sql_server_password">SQL Server密码</label><input type="password"
+                                    class="form-control" maxlength="16" id="sql_server_password" />
+                            </div>
+                            <div class="form-group">
+                                <label for="sql_server_username">SQL Server用户名</label><input type="sql_server_username"
+                                    class="form-control" maxlength="16" id="sql_server_username" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div type="submit" class="btn btn-default tableBtn" id="update_submit" onclick="update()">更新</div>
+                <div type="submit" class="btn btn-default tableBtn" id="add_submit">新增</div>
+            </div>
+
+
+        </div>
+        <!--        警报信息面板-->
+        <div class="board warn">
+            <span class="warnTitle">警报信息</span>
+            <div style="overflow-y:auto;height:430px !important;position: relative;top: 80px;width: 820px;left: 20px;">
+                <table class="warn_message">
+                    <thead>
+                        <tr>
+                            <!-- <td class="list1">
+                                <input type="checkbox">
+                            </td> -->
+                            <td class="warn_project">序号</td>
+                            <td class="warn_time">时间</td>
+                            <td class="warn_content">警报内容</td>
+                            <td class="warn_server">服务器IP</td>
+                            <!-- <td class="warn_way">警报方式</td> -->
+                            <!-- <td class="operation">操作</td> -->
+                        </tr>
+                    </thead>
+                    <!--            警告信息表主题-->
+                    <tbody class="tablebody"></tbody>
+                </table>
+            </div>
+            <div class="zxf_pagediv"></div>
+        </div>
+        <div class="board system">
+            <span class="systemTitle">系统设置</span>
+        </div>
+
+    </div>
+
+    <script src="js/show_board.js"></script>
+    <script src="js/control_charts.js"></script>
+    <script src="js/server.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            initWindows($(".mini_background"), $(".close_background"));
+            //搜索框
+            $('#key').focus(function () {
+                if ($(this).val() == '输入关键词查找') {
+                    $(this).val("");
+                }
+            });
+            $('#key').blur(function () {
+                if ($(this).val() == "") {
+                    $(this).val('输入关键词查找');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

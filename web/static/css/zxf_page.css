@@ -1,0 +1,74 @@
+div.zxf_pagediv{
+	text-align: center;
+	color: #2f344e;
+	position: absolute;
+	top: 520px;
+	right: 50px;
+}
+div.zxf_pagediv a{
+	text-decoration: none;
+	
+}
+div.zxf_pagediv span,div.zxf_pagediv a{
+	display: inline-block;
+	box-sizing: border-box;
+}
+.current{
+	color: #ffffff;
+	background: #605aff;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 5px;
+	margin: 0 5px;
+}
+.zxfPagenum{
+	color: #2f344e;
+	background: #fff;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border: 0.5px solid #c5d0db;
+	margin: 0 5px;
+	border-radius: 5px;
+}
+.nextpage{
+	border: 0.5px solid #c5d0db;
+	border-radius: 5px;
+	margin: 0 5px;
+}
+.nextbtn,.prebtn,span.disabled{
+	color: #2f344e;
+	background: #fff;
+	width: 30px;
+	height: 30px;
+	line-height: 42px;
+	border-radius: 5px;
+}
+.zxfinput{
+	width: 52px;
+	height: 30px;
+	text-align: center;
+	box-sizing: border-box;
+	border: 1px solid #E6E6E6;
+	margin: 0 8px;
+	border-radius: 5px;
+	color: #787a87;
+}
+.zxfokbtn{
+	width: 48px;
+	height: 32px;
+	line-height: 32px;
+	border: 1px solid #E6E6E6;
+	margin-left: 10px;
+	cursor:pointer;
+	border-radius: 5px;
+	background: #fff;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"]{
+  -moz-appearance: textfield;
+}

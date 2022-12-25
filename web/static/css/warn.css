@@ -1,0 +1,299 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html,body {
+    height: 100%;
+    background-image: url("../images/bg.jpg");
+    background-repeat: no-repeat;
+}
+
+ul,ol {
+    list-style: none;
+}
+
+img {
+    display: block;
+}
+
+/*背景图大小*/
+.indexbackgroud {
+    width: 1024px;
+    height: 640px
+}
+/*顶部标题样式*/
+.title {
+    padding-top: 10px;
+    padding-left: 16px;
+}
+
+img.logo {
+    float: left;
+    width: 30px;
+    margin-top: -2px;
+
+}
+
+.title span {
+    font-size: 16.67px;
+    font-family: "思源黑体 CN";
+    color: #464d73;
+    margin-left: 13px;
+}
+
+.bot_left {
+    margin-top: 19px;
+}
+
+/*左侧菜单常规样式*/
+.list_normal {
+    border: none;
+    font-size: 12.62px;
+    color: #7581c1;
+    width: 118px;
+    text-indent: 7px;
+    line-height: 39.01px;
+    margin-left: 14px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    font-family: "思源黑体 CN";
+}
+
+/*左侧icon样式*/
+.bot_left > ul img {
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-left: 11px;
+}
+/*左侧菜单选中样式，起个类名list_hover*/
+.list_hover, .list_normal:hover{
+    color: #ffffff;
+    background-color: #605aff;
+    border-radius: 10px;
+}
+
+/*顶部右侧关闭按钮*/
+.close_background {
+    float: right;
+    width: 60px;
+    height: 43px;
+    margin-top: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img.close {
+    width: 16px;
+    height: 100%;
+}
+
+/*顶部右侧关闭按钮 经过样式*/
+.close_background:hover {
+    background-color: #e81123;
+
+}
+/*顶部右侧最小化按钮*/
+.mini_background {
+    float: right;
+    width: 60px;
+    height: 43px;
+    margin-top: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img.mini {
+    width: 16px;
+    height: 100%;
+}
+/*顶部右侧最小化按钮 经过样式*/
+.mini_background:hover {
+    background-color: #c7cacf;
+}
+/*信息按钮*/
+img.message {
+    width: 18px;
+    height: 100%;
+}
+
+.message_background {
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-top: -3px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+/*信息按钮经过样式*/
+.message_background:hover {
+    background-color: #c7cacf;
+}
+
+.board {
+    width: 869.45px;
+    height: 576.84px;
+    border-radius: 10px;
+    position: absolute;
+    top: 51.69px;
+    left: 143px;
+;
+}
+
+/*警报页面所有文字统一字体*/
+.warn {
+    font-family: "思源黑体 CN";
+    font-size: 12px;
+}
+
+/*警报信息样式*/
+.warnTitle,.serverTitle,.systemTitle {
+    font-size: 22px;
+    font-weight: bold;
+    position: absolute;
+    top: 18px;
+    left: 26px;
+    color: #2f344e;
+}
+
+.board > table {
+    table-layout:fixed;
+    position: absolute;
+    left: 25px;
+    top: 80px;
+    right: 20px;
+    font-family: "思源黑体 CN";
+    font-size: 14px;
+    border-collapse: collapse;
+}
+
+td {
+    min-width: 10%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.tablebody {
+    table-layout:fixed;
+}
+
+thead {
+    font-size: 14px;
+    background-color: #f5f7fc;
+    height: 31px;
+    font-weight: bold;
+    line-height: 18px;
+}
+/*表格下边框*/
+tbody td {
+    height: 38px;
+    font-family: "思源黑体 CN";
+    font-size: 13px;
+}
+
+tbody tr {
+    border-bottom: 0.5px solid #e9edf5;
+}
+
+/*表格最后一行无下边框*/
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+/*复选框列*/
+.list1 {
+    /*width: 70px;*/
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    width: 7%;
+}
+
+.warn_time{
+    /*width: 120px;*/
+    max-width: 100px;
+    min-width: 15%;
+    width: 15%;
+    padding: 0 10px;
+}
+
+.warn_content {
+    /*width: 200px;*/
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 30%;
+    max-width: 50px;
+    padding: 0 10px;
+}
+
+.warn_project {
+    /*width: 100px;*/
+    width: 3%;
+    padding: 0 10px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.warn_server{
+    /*width: 100px;*/
+    width: 25%;
+    padding: 0 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.warn_way {
+    /*width: 80px;*/
+    text-align: center;
+    width: 7%;
+    padding: 0 10px;
+}
+
+.operation {
+    /*width: 100px;*/
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    width: 10%;
+}
+
+input[type=checkbox] {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    left: 19px;
+    top: 2px;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #7581c1;
+    font-family: "思源黑体 CN";
+}
+
+button:hover {
+    color: #315efb;
+    text-decoration: underline;
+}
+
+.operation_button {
+    display: flex;
+    justify-content: space-around;
+}
+
+.search {
+    position: relative;
+
+}
+
