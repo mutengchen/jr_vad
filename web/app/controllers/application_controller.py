@@ -49,11 +49,12 @@ def voice_list():
         result = []
         last_end = 0
         for s_item in section_list:
+            print(s_item)
             # 每一个百分比乘以当前进度条的长度，当前进度条长度为200px
             if last_end == 0:
-                result.append([s_item[0] * 200, s_item[1] * 200, 0])
+                result.append({"width":"%.3fpx"%(s_item[1]* 200-s_item[0] * 200),"left":"0px"} )
             else:
-                result.append([s_item[0] * 200, s_item[1] * 200, s_item[0] * 200 - last_end])
+                result.append({"width":"%.3fpx"%(s_item[1] * 200-s_item[0] * 200),"left": "%.3fpx"%(int(s_item[0] * 200 - last_end))})
             last_end = s_item[1] * 200
         print(result)
         temp.append({"id": item[0], "path": item[1], "voice_len": item[2], "section": result, "created_time": item[4]})
