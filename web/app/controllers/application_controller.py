@@ -77,7 +77,7 @@ def uploader():
         # 读取保存完成音频文件开始转换文件，然后返回文件
         model.start(f.filename)
         #重定向回首页
-        return redirect(url_for('application.index'))
+        return {"code":200,"result":"上传完成"}
 
 
 
