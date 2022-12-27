@@ -1,5 +1,6 @@
 import csv
 import glob
+import json
 import os
 import sqlite3
 from web.database.sqlite_util import createTable
@@ -34,6 +35,29 @@ def index():
         temp.append({"id":item[0],"path":item[1],"voice_len":item[2],"section":result,"created_time":item[4]})
     kwargs = {"data": temp}
     return render_template("mainpage.html",**kwargs)
+
+
+
+@appc.route('/voice_list')
+def voice_list():
+    data_list = getallVoiceRecord()
+    print(data_list)
+    temp = []
+    for item in data_list:
+        # 这里的section需要转换下，让前段不需要计算
+        section_list = literal_eval(item[3])
+        result = []
+        last_end = 0
+        for s_item in section_list:
+            # 每一个百分比乘以当前进度条的长度，当前进度条长度为200px
+            if last_end == 0:
+                result.append([s_item[0] * 200, s_item[1] * 200, 0])
+            else:
+                result.append([s_item[0] * 200, s_item[1] * 200, s_item[0] * 200 - last_end])
+            last_end = s_item[1] * 200
+        print(result)
+        temp.append({"id": item[0], "path": item[1], "voice_len": item[2], "section": result, "created_time": item[4]})
+        return json.dumps(temp)
 
 @appc.route('/upload')
 def upload():
