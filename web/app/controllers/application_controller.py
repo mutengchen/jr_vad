@@ -8,7 +8,7 @@ from flask import redirect, Blueprint, request, render_template, send_file,url_f
 from ast import literal_eval
 from vad.VadModel import VadModel
 from web.database.sqlite_util import getallVoiceRecord
-appc = Blueprint('application', __name__, url_prefix='/')
+appc = Blueprint('application', __name__, url_prefix='/',template_folder='static',static_folder='static')
 
 model = VadModel()
 
@@ -17,6 +17,7 @@ model = VadModel()
 def index():
     #查找当前数据库里面的所有语音记录
     data_list = getallVoiceRecord()
+    progress_px = 780
     print(data_list)
     temp = []
     for item in data_list:
@@ -27,19 +28,20 @@ def index():
         for s_item in section_list:
             #每一个百分比乘以当前进度条的长度，当前进度条长度为200px
             if last_end==0:
-                result.append([s_item[0]*200,s_item[1]*200,0])
+                result.append([s_item[0]*progress_px,s_item[1]*progress_px,0])
             else:
-                result.append([s_item[0]*200,s_item[1]*200,s_item[0]*200-last_end])
-            last_end = s_item[1]*200
+                result.append([s_item[0]*progress_px,s_item[1]*progress_px,s_item[0]*progress_px-last_end])
+            last_end = s_item[1]*progress_px
         print(result)
         temp.append({"id":item[0],"path":item[1],"voice_len":item[2],"section":result,"created_time":item[4]})
     kwargs = {"data": temp}
-    return render_template("mainpage.html",**kwargs)
+    return render_template(url_for("static",filename="mainpage.html"),**kwargs)
 
 
 
 @appc.route('/voice_list')
 def voice_list():
+    progress_px =780
     data_list = getallVoiceRecord()
     print(data_list)
     temp = []
@@ -50,12 +52,12 @@ def voice_list():
         last_end = 0
         for s_item in section_list:
             print(s_item)
-            # 每一个百分比乘以当前进度条的长度，当前进度条长度为200px
+            # 每一个百分比乘以当前进度条的长度
             if last_end == 0:
-                result.append({"width":"%.3fpx"%(s_item[1]* 200-s_item[0] * 200),"left":"0px"} )
+                result.append({"width":"%.3fpx"%(s_item[1]* progress_px-s_item[0] * progress_px),"left":"0px"} )
             else:
-                result.append({"width":"%.3fpx"%(s_item[1] * 200-s_item[0] * 200),"left": "%.3fpx"%(int(s_item[0] * 200 - last_end))})
-            last_end = s_item[1] * 200
+                result.append({"width":"%.3fpx"%(s_item[1] * progress_px-s_item[0] * progress_px),"left": "%.3fpx"%(int(s_item[0] * progress_px - last_end))})
+            last_end = s_item[1] * progress_px
         print(result)
         temp.append({"id": item[0], "path": item[1], "voice_len": item[2], "section": result, "created_time": item[4]})
         return json.dumps(temp)
