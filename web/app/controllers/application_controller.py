@@ -40,6 +40,7 @@ def index():
 @appc.route('/delete/<id>',methods=['GET'])
 def delete_voice(id):
     deleteVoiceRecord(id)
+    #TODO 同时需要删除掉web/output里面的文件
     return {"code":200}
 
 
@@ -62,9 +63,8 @@ def voice_list():
             else:
                 result.append({"width":"%.3fpx"%(s_item[1] * progress_px-s_item[0] * progress_px),"left": "%.3fpx"%(int(s_item[0] * progress_px - last_end))})
             last_end = s_item[1] * progress_px
-        print(result)
         temp.append({"id": item[0], "path": item[1], "voice_len": item[2], "section": result, "created_time": item[4]})
-        return json.dumps(temp)
+    return json.dumps(temp)
 
 @appc.route('/upload')
 def upload():

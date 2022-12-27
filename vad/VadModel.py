@@ -27,8 +27,8 @@ class VadModel():
 
     def __init__(self):
         self.cur_path = os.path.dirname(os.path.realpath(__file__))
-        self.upload_folder = os.path.join(self.cur_path,"upload")
-        self.output_folder = os.path.join(os.getcwd(),"web/output")
+        self.upload_folder = os.path.join(os.getcwd(),"web/static/upload")
+        self.output_folder = os.path.join(os.getcwd(),"web/static/output")
         self.SAMPLING_RATE = 16000
         self.use_onnx = False
         #初始化model和工具类
@@ -57,7 +57,7 @@ class VadModel():
     #开始对指定语音文件进行分析抽取
     def start(self,filepath):
         print("转换语音格式中....")
-        source_path = os.path.join(self.cur_path, "upload\\%s" % filepath)
+        source_path = os.path.join(self.upload_folder, "%s" % filepath)
         #源文件需要转化成wav格式
         source_file_stats = os.stat(source_path)
         print("将要识别的源文件%s :%d byte"%(source_path,source_file_stats.st_size))
@@ -93,7 +93,7 @@ class VadModel():
             Audio(target_path)
             print("转换语音成功：%s 耗时：%d s" % (target_path, time.time() - start_time))
             #把生成的数据添加到数据库中
-            saveVoiceRecord(wav_file,sound_len,voice_section)
+            saveVoiceRecord(filepath,sound_len,voice_section)
             # stream流下载到浏览器
             send_file(target_path, as_attachment=True)
             start_time = time.time()
