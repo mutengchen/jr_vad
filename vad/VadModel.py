@@ -28,21 +28,22 @@ class VadModel():
     def __init__(self):
         self.cur_path = os.path.dirname(os.path.realpath(__file__))
         self.upload_folder = os.path.join(self.cur_path,"upload")
+        self.output_folder = os.path.join(os.getcwd(),"web/output")
         self.SAMPLING_RATE = 16000
         self.use_onnx = False
         #初始化model和工具类
         #TODO 应该是一个单线程的处理，看看这个model是否支持多线程操作
         self.model = init_jit_model(os.path.join(os.path.dirname(os.path.realpath(__file__)),'files/silero_vad.jit'))
 
-    def fotmat2Wav(self,source_folder, voice_list):
+    def fotmat2Wav(self,output_folder, voice_list):
         # TODO 正则匹配下文件名是否是以wav为后缀的，不是的话，转换成wav
         # 创建input和output文件夹
-        ouput_folder = os.path.join(source_folder, "output")
+        # ouput_folder = os.path.join(source_folder, "output")
         # 截取文件名
         wav_list = []
-        if not os.path.exists(ouput_folder):
+        if not os.path.exists(output_folder):
             print("output文件夹不存在")
-            os.mkdir(ouput_folder)
+            os.mkdir(output_folder)
         # 判断文件是否是mp3或者是m4a，然后转换成wav
         for item in voice_list:
             wav_name = item.split("\\")[-1].split(".")[0]
@@ -63,7 +64,7 @@ class VadModel():
         #TODO 暂时是只识别一个，后面可以是一整个列表
         voice_list = []
         voice_list.append(source_path)
-        wav_list,sound_len = self.fotmat2Wav(self.cur_path,voice_list)
+        wav_list,sound_len = self.fotmat2Wav(self.output_folder,voice_list)
         print("文件的时长：%d",sound_len)
         print(wav_list)
         print("格式转换完毕.")
@@ -84,7 +85,7 @@ class VadModel():
             #存到数据库里面
             print(voice_section)
             print("保存合成录音")
-            target_path = os.path.join(self.cur_path, "output/%s" % wav_file)
+            target_path = os.path.join(self.output_folder, "%s" % wav_file)
             print("target_path = %s" % target_path)
             fuck = collect_chunks(speech_timestamps, wav)
             save_audio(target_path, fuck, sampling_rate=self.SAMPLING_RATE)

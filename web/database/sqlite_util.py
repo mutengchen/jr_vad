@@ -42,12 +42,22 @@ def getallVoiceRecord():
     print(result)
     return result
 
+def deleteVoiceRecord(id):
+    sql =  """
+        delete  from VOICE where id = %d
+    """%(id)
+    print(sql)
+    cursor.execute(sql)
+    conn.commit()
+
+
 #设置当前数据库存在的绝对路径
 cur_path = os.path.dirname(os.path.realpath(__file__))
 print(cur_path)
 conn = sqlite3.connect(database=os.path.join(cur_path,"vad.db"),check_same_thread=False)
 cursor = conn.cursor()
 createTable()
+# deleteVoiceRecord(8)
 # saveVoiceRecord("222",11,"fuck")
 
 

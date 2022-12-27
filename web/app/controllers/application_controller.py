@@ -7,8 +7,8 @@ from web.database.sqlite_util import createTable
 from flask import redirect, Blueprint, request, render_template, send_file,url_for
 from ast import literal_eval
 from vad.VadModel import VadModel
-from web.database.sqlite_util import getallVoiceRecord
-appc = Blueprint('application', __name__, url_prefix='/',template_folder='static',static_folder='static')
+from web.database.sqlite_util import getallVoiceRecord,deleteVoiceRecord
+appc = Blueprint('application', __name__, url_prefix='/')
 
 model = VadModel()
 
@@ -35,8 +35,12 @@ def index():
         print(result)
         temp.append({"id":item[0],"path":item[1],"voice_len":item[2],"section":result,"created_time":item[4]})
     kwargs = {"data": temp}
-    return render_template(url_for("static",filename="mainpage.html"),**kwargs)
+    return render_template("mainpage.html",**kwargs)
 
+@appc.route('/delete/<id>',methods=['GET'])
+def delete_voice(id):
+    deleteVoiceRecord(id)
+    return {"code":200}
 
 
 @appc.route('/voice_list')
