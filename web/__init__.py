@@ -33,5 +33,5 @@ def create_app(test_config=None):
     # 注册数据库
     from web.database import db
     db.init_app(app)
-
+    # app.run(host="0.0.0.0",port=5000,debug=True)
     return app
